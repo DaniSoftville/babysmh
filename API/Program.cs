@@ -1,5 +1,8 @@
 /* This program.cs class is the starting point of our app */
 
+using API.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 /* Add services to the container.(Dependency Injection Container) when we wanna use a particular service inside of our classes in our project, 
@@ -9,6 +12,10 @@ builder.Services.AddControllers(); /* Because we're using a web api, we use this
 We add our controllers to our project inside this container */
 builder.Services.AddEndpointsApiExplorer(); //We need these coiuple of services to generate the swagger content we see in the browser
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<StoreContext>(opt =>
+{
+    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 var app = builder.Build();
 
