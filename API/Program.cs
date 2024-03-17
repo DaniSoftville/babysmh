@@ -31,4 +31,20 @@ app.UseAuthorization();
 
 app.MapControllers(); //The API knows where to send the requests because we add a route configuration for ou controllers here
 
+/* We can create our database by coding...
+ */
+var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<StoreContext>();
+var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
+try
+{
+    context.Database.Migrate(); //Creates a database if it does not already exist.
+    DbInitializer.Initialize(context); /* Because we created a static class, we can just use the Initialize method created and pass it the context. 
+    We can drop our database to see if it works. dotnet ef database drop, after that, dotnet run to succesfully seed the db */
+}
+catch (Exception ex)
+{
+    logger.LogError(ex, "A problem occured during migration");
+}
 app.Run();
