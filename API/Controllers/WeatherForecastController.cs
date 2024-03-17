@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-[ApiController]
+[ApiController] //Gives a class like an API power
 [Route("[controller]")] /* These square brackets are placeholders and are replaces with the public class bellow, 
 this is the route that we go when we execute that request to our API endpoint*/
 public class WeatherForecastController : ControllerBase
