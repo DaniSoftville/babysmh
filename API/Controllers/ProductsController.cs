@@ -12,7 +12,7 @@ namespace API.Controllers
 
 {
     [ApiController]//1 Gives this attribute
-    [Route("api[controller]")]//2 Specifies the route 
+    [Route("api/[controller]")]//2 Specifies the route 
     public class ProductsController //3 Derive from Controller base using Microsoft.AspNetCore.Mvc;
 
     {
